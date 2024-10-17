@@ -9,6 +9,9 @@ import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.teamcode.sensors.Sensors;
 import org.firstinspires.ftc.teamcode.vision.Vision;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Drivetrain {
 
     private Robot robot;
@@ -16,25 +19,15 @@ public class Drivetrain {
     private HardwareMap hardwareMap;
     private Vision vision;
 
-    // according to the current design
-
-//    private DcMotorEx rightFront = hardwareMap.get(DcMotorEx.class, "rightFrontMotor");
-//    private DcMotorEx leftFront = hardwareMap.get(DcMotorEx.class, "leftFrontMotor");
-
-    private DcMotorEx rightBack = hardwareMap.get(DcMotorEx.class, "rightBackMotor");
-    private DcMotorEx leftBack = hardwareMap.get(DcMotorEx.class, "leftBackMotor");
-
     public Drivetrain(HardwareMap hardwareMap, Robot robot, Sensors sensors, Vision vision) {
         this.robot = robot;
         this.sensors = sensors;
         this.hardwareMap = hardwareMap;
         this.vision = vision;
-    }
 
-    public Drivetrain(HardwareMap hardwareMap, Robot robot, Sensors sensors) {
-        this.robot = robot;
-        this.sensors = sensors;
-        this.hardwareMap = hardwareMap;
+        DcMotorEx rightBack = hardwareMap.get(DcMotorEx.class, "rightBackMotor");
+        DcMotorEx leftBack = hardwareMap.get(DcMotorEx.class, "leftBackMotor");
+
     }
 
 }

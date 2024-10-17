@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.teamcode.utils.Globals;
 import org.firstinspires.ftc.teamcode.utils.RunMode;
 
@@ -23,7 +22,7 @@ public class TeleOp extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         Globals.RUNMODE = RunMode.TELEOP;
 
-//        Robot robot = new Robot(robotMap)
+//        Robot robot = new Robot(hardwareMap)
 
     }
 }
