@@ -17,17 +17,14 @@ public class Slides {
 
     private Drivetrain drivetrain;
     private Sensors sensors;
-    private Deposit deposit;
-
     private DcMotorEx slidesMotor1;
     private DcMotorEx slidesMotor2;
 
     private double targetLength = 0;
 
-    public Slides(HardwareMap hardwareMap, Drivetrain drivetrain, Sensors sensors, Deposit deposit) {
+    public Slides(HardwareMap hardwareMap, Drivetrain drivetrain, Sensors sensors) {
         this.drivetrain = drivetrain;
         this.sensors = sensors;
-        this.deposit = deposit;
 
         slidesMotor1 = hardwareMap.get(DcMotorEx.class, "slidesMotor1");
         slidesMotor2 = hardwareMap.get(DcMotorEx.class, "slidesMotor2");

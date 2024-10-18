@@ -14,7 +14,7 @@ public class Deposit {
     private Drivetrain drivetrain;
 
     public Deposit(HardwareMap hardwareMap, Robot robot, Sensors sensors) {
-        slides = new Slides(hardwareMap, robot.drivetrain, sensors, this);
+        slides = new Slides(hardwareMap, robot.drivetrain, sensors);
 
     }
 }
