@@ -1,28 +1,40 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.Robot;
+import org.firstinspires.ftc.teamcode.sensors.Sensors;
+import org.firstinspires.ftc.teamcode.subsystems.drivetrain.Drivetrain;
 import org.firstinspires.ftc.teamcode.utils.Globals;
 import org.firstinspires.ftc.teamcode.utils.RunMode;
+import org.firstinspires.ftc.teamcode.vision.Vision;
 
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name="Basic: Linear OpMode", group="Linear OpMode")
 public class TeleOp extends LinearOpMode {
+    ElapsedTime runtime = new ElapsedTime();
 
-    /**
-     * Override this method and place your code here.
-     * <p>
-     * Please do not catch {@link InterruptedException}s that are thrown in your OpMode
-     * unless you are doing it to perform some brief cleanup, in which case you must exit
-     * immediately afterward. Once the OpMode has been told to stop, your ability to
-     * control hardware will be limited.
-     *
-     * @throws InterruptedException When the OpMode is stopped while calling a method
-     *                              that can throw {@link InterruptedException}
-     */
+    Robot robot = new Robot(hardwareMap, null);
+    Sensors sensors = new Sensors();
+    Drivetrain drivetrain = new Drivetrain(hardwareMap, robot, sensors, null);
+
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
         Globals.RUNMODE = RunMode.TELEOP;
+        telemetry.addData("Status", "Initialized");
+        telemetry.update();
 
-//        Robot robot = new Robot(hardwareMap)
+        waitForStart();
+        runtime.reset();
+
+        while (opModeIsActive()) {
+            drivetrain.setPowerWithGamepad(gamepad1.left_stick_y, gamepad1.right_stick_x);
+
+            telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.addData("Motors", "left (%.2f), right (%.2f)", gamepad1.left_stick_y, gamepad1.right_stick_x);
+            telemetry.update();
+
+        }
 
     }
 }
