@@ -31,6 +31,8 @@ public class Drivetrain {
     private HardwareMap hardwareMap;
     private Vision vision;
     private final DcMotorEx rightBack;
+    private final DcMotorEx rightFront;
+    private final DcMotorEx leftFront;
     private final DcMotorEx leftBack;
 
     public Drivetrain(HardwareMap hardwareMap, Robot robot, Sensors sensors, Vision vision) {
@@ -39,26 +41,23 @@ public class Drivetrain {
         this.hardwareMap = hardwareMap;
         this.vision = vision;
 
-        this.rightBack = hardwareMap.get(DcMotorEx.class, "rightBackMotor");
-        this.leftBack = hardwareMap.get(DcMotorEx.class, "leftBackMotor");
-
+        rightBack = hardwareMap.get(DcMotorEx.class, "RB");
+        rightFront=hardwareMap.get(DcMotorEx.class,"RF");
+        leftFront=hardwareMap.get(DcMotorEx.class,"LF");
+        leftBack = hardwareMap.get(DcMotorEx.class, "LB");
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
-    public void setPower(double leftBackPower, double rightBackPower) {
-        rightBack.setPower(rightBackPower);
-        leftBack.setPower(leftBackPower);
+    public void setPower(double LBp, double LFp,double RBp,double RFp) {
+        rightBack.setPower(Range.clip(RBp,-1,1));
+        rightFront.setPower(Range.clip(RFp,-1,1));
+        leftFront.setPower(Range.clip(LFp,-1,1));
+        leftBack.setPower(Range.clip(LBp,-1,1));
     }
 
-    public void setPowerWithGamepad(double leftJoystick, double rightJoystick) {
-        double leftPower;
-        double rightPower;
-
-        double drive = -leftJoystick;
-
-        leftPower    = Range.clip(drive + rightJoystick, -1.0, 1.0) ;
-        rightPower   = Range.clip(drive - rightJoystick, -1.0, 1.0) ;
-
-        setPower(leftPower, rightPower);
+    public void setPowerWithGamepad(double leftY, double leftX,double RightY, double RightX) {
+        setPower(-leftY-leftX+RightX,-leftY+leftX+RightX,-leftY+leftX-RightX,-leftY-leftX-RightX);
     }
 
     public void setRobotDirection(boolean isHeadingFront) {

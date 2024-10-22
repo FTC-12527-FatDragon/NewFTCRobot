@@ -16,7 +16,7 @@ public class Robot {
 
     public final Drivetrain drivetrain;
     public final Sensors sensors;
-    public final Deposit deposit;
+    //public final Deposit deposit;
     public final Vision vision;
 
     public Robot(HardwareMap hardwareMap) {
@@ -27,7 +27,7 @@ public class Robot {
         this.vision = vision;
 
         sensors = new Sensors();
-        deposit = new Deposit(hardwareMap, this, sensors);
+        //deposit = new Deposit(hardwareMap, this, sensors);
 
         drivetrain = new Drivetrain(hardwareMap, this, sensors, vision);
 
