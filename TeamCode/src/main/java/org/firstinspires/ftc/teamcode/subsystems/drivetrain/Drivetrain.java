@@ -43,8 +43,8 @@ public class Drivetrain {
         rightFront=hardwareMap.get(DcMotorEx.class,"RF");
         leftFront=hardwareMap.get(DcMotorEx.class,"LF");
         leftBack = hardwareMap.get(DcMotorEx.class, "LB");
-        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
+//        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+//        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     public void setPower(double LBP, double LFP,double RBP,double RFP) {
@@ -94,12 +94,16 @@ public class Drivetrain {
 
     public void setRobotDirection(boolean isHeadingFront) {
         if (isHeadingFront) {
-            leftBack.setDirection(DcMotor.Direction.REVERSE);
-            rightBack.setDirection(DcMotor.Direction.FORWARD);
+            leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
+            leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
+            rightFront.setDirection(DcMotorSimple.Direction.FORWARD);
+            rightBack.setDirection(DcMotorSimple.Direction.FORWARD);
         }
         else {
-            leftBack.setDirection(DcMotor.Direction.FORWARD);
-            rightBack.setDirection(DcMotor.Direction.REVERSE);
+            rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+            rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+            leftBack.setDirection(DcMotorSimple.Direction.FORWARD);
+            leftBack.setDirection(DcMotorSimple.Direction.FORWARD);
         }
     }
 

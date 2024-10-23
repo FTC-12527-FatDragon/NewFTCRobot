@@ -32,6 +32,7 @@ public class TeleOp extends LinearOpMode {
 
         robot.drivetrain.setZeroPowerBrake();
         robot.drivetrain.enablePIDFControl(pidfTeleopCoefficients);
+        robot.drivetrain.setRobotDirection(true);
 
         waitForStart();
         runtime.reset();
