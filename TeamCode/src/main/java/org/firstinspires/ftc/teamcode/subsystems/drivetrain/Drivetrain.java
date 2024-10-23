@@ -4,8 +4,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.teamcode.sensors.Sensors;
 import org.firstinspires.ftc.teamcode.vision.Vision;
@@ -45,15 +47,39 @@ public class Drivetrain {
         leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
-    public void setPower(double LBp, double LFp,double RBp,double RFp) {
-        rightBack.setPower(Range.clip(RBp,-1,1));
-        rightFront.setPower(Range.clip(RFp,-1,1));
-        leftFront.setPower(Range.clip(LFp,-1,1));
-        leftBack.setPower(Range.clip(LBp,-1,1));
+    public void setPower(double LBP, double LFP,double RBP,double RFP) {
+        rightBack.setPower(Range.clip(RBP,-1,1));
+        rightFront.setPower(Range.clip(RFP,-1,1));
+        leftFront.setPower(Range.clip(LFP,-1,1));
+        leftBack.setPower(Range.clip(LBP,-1,1));
     }
 
     public void setPowerWithGamepad(double leftY, double leftX,double RightY, double RightX) {
-        setPower(-leftY-leftX+RightX,-leftY+leftX+RightX,-leftY+leftX-RightX,-leftY-leftX-RightX);
+        setPower(- leftY - leftX + RightX,
+                 - leftY + leftX + RightX,
+                 - leftY + leftX - RightX,
+                 - leftY - leftX - RightX);
+    }
+
+    public void enablePIDFControl(PIDFCoefficients pidfCoef) {
+        rightBack.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoef);
+        rightFront.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoef);
+        leftBack.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoef);
+        leftFront.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoef);
+    }
+
+    public void setVelocity(double LBV, double LFV,double RBV,double RFV) {
+        rightBack.setVelocity(Range.clip(RBV, -Constants.maxMotorAngularVelocity, Constants.maxMotorAngularVelocity));
+        rightFront.setVelocity(Range.clip(RFV, -Constants.maxMotorAngularVelocity, Constants.maxMotorAngularVelocity));
+        leftFront.setVelocity(Range.clip(LFV, -Constants.maxMotorAngularVelocity, Constants.maxMotorAngularVelocity));
+        leftBack.setVelocity(Range.clip(LBV, -Constants.maxMotorAngularVelocity, Constants.maxMotorAngularVelocity));
+    }
+
+    public void setVelocityWithGamepad(double leftY, double leftX,double RightY, double RightX) {
+        setVelocity(- leftY - leftX + RightX,
+                    - leftY + leftX + RightX,
+                    - leftY + leftX - RightX,
+                    - leftY - leftX - RightX);
     }
 
     /**

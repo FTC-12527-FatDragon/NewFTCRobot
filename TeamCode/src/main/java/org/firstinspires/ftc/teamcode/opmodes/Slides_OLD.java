@@ -5,11 +5,16 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.teamcode.utils.Globals;
+import org.firstinspires.ftc.teamcode.utils.RunMode;
+
 @TeleOp (name = "Extend Test", group = "TeleOp")
-public class Slides extends LinearOpMode {
+public class Slides_OLD extends LinearOpMode {
     private Servo slide;
     @Override
     public void runOpMode(){
+        Globals.RUNMODE = RunMode.TELEOP;
+
         telemetry.addData("Status", "Initialized");
         telemetry.update();
         slide = hardwareMap.get(Servo.class, "extend");
