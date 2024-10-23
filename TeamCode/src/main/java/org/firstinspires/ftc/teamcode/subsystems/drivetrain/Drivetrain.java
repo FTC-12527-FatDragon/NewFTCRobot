@@ -5,14 +5,10 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.Range;
-import com.sun.tools.javac.tree.DCTree;
 
 import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.teamcode.sensors.Sensors;
 import org.firstinspires.ftc.teamcode.vision.Vision;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class Drivetrain {
 
@@ -58,6 +54,16 @@ public class Drivetrain {
 
     public void setPowerWithGamepad(double leftY, double leftX,double RightY, double RightX) {
         setPower(-leftY-leftX+RightX,-leftY+leftX+RightX,-leftY+leftX-RightX,-leftY-leftX-RightX);
+    }
+
+    /**
+     * Call this function to set BRAKE state when no power for EVERY motor in MECANUM Drivetrain.
+     */
+    public void setZeroPowerBrake() {
+        rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     public void setRobotDirection(boolean isHeadingFront) {
